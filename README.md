@@ -73,11 +73,12 @@
 
 ## 快速开始
 
-需要 Python 3.9+ 和 Pillow；测试与部署另外需要 Node.js 18+。
+需要 Python 3.12+（SEO 模板使用新版 f-string 语法）；测试与部署另外需要 Node.js 22.12+。
+本 fork 的域名、双项目免费部署与更新命令见 [DEPLOYMENT.md](DEPLOYMENT.md)。
 
 ```bash
 git clone https://github.com/atuizz/posewear.git && cd posewear
-pip install pillow
+pip install -r requirements.txt
 
 # 1. 从原作者的图库下载数据和图片到 ./assets-raw（数 GB，耗时较长）
 python3 scripts/fetch-assets.py            # 也可只下部分：pose costume portrait
@@ -92,7 +93,7 @@ python3 -m http.server 8787 -d dist
 | 环境变量 | 作用 | 默认 |
 |---|---|---|
 | `POSEWEAR_RAW` | 原始素材目录 | `assets-raw` |
-| `POSEWEAR_SITE` | 站点地址，用于 sitemap 和分享链接 | `https://posewear.pages.dev` |
+| `POSEWEAR_SITE` | 站点地址，用于 sitemap 和分享链接 | `https://posewear.halili.win` |
 
 ## 部署
 

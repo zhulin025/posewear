@@ -61,11 +61,12 @@ Pose, outfit and portrait reference galleries with bilingual prompts, plus a bri
 
 ## Quick start
 
-You need Python 3.9+ with Pillow. Tests and deploys also need Node.js 18+.
+You need Python 3.12+ for the SEO templates. Tests and deploys also need Node.js 22.12+.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for this fork's two-project Pages deployment.
 
 ```bash
 git clone https://github.com/atuizz/posewear.git && cd posewear
-pip install pillow
+pip install -r requirements.txt
 python3 scripts/fetch-assets.py   # downloads data and images from the original galleries (several GB)
 python3 build.py                  # outputs dist/
 python3 -m http.server 8787 -d dist

@@ -1,5 +1,5 @@
 # v10 构建后处理：哈希资源、静态详情页、SEO 文件、_headers（由 build.py exec）
-SITE=os.environ.get('POSEWEAR_SITE','https://posewear.pages.dev').rstrip('/')  # 部署到自己的域名时改这里
+SITE=os.environ.get('POSEWEAR_SITE','https://posewear.halili.win').rstrip('/')  # 可用环境变量覆盖这份 fork 的默认域名
 h8=lambda b:hashlib.sha256(b if isinstance(b,bytes) else b.encode()).hexdigest()[:10]
 os.makedirs(f'{D}/assets',exist_ok=True)
 for f in os.listdir(f'{D}/assets'): os.remove(f'{D}/assets/{f}')

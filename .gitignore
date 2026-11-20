@@ -1,5 +1,8 @@
 # 构建产物与素材（素材不随仓库分发，见 scripts/fetch-assets.py）
 dist/
+dist-pages/
+dist-originals/
+.venv/
 assets-raw/
 raw/
 # 依赖与本地状态

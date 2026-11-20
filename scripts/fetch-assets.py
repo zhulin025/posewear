@@ -9,7 +9,8 @@
   python3 scripts/fetch-assets.py pose costume # 只下载部分素材库
   python3 scripts/fetch-assets.py --meta-only  # 只下载数据，不下载图片
 """
-import json, os, re, sys, time, urllib.request, concurrent.futures as cf
+import json, os, re, sys, time, threading, concurrent.futures as cf
+import requests
 
 SRC = {
     'pose': 'https://ai-pose-gallery.pages.dev/',
@@ -19,7 +20,16 @@ SRC = {
 }
 OUT = os.environ.get('POSEWEAR_RAW', 'assets-raw')
 UA = {'User-Agent': 'Mozilla/5.0 (PoseWear local build)'}
-WORKERS = 4
+WORKERS = max(1, min(8, int(os.environ.get('POSEWEAR_DOWNLOAD_WORKERS', '4'))))
+LOCAL = threading.local()
+
+
+def session():
+    # 每个下载线程复用连接，保持低并发，避免逐图重新建立 TLS 连接。
+    if not hasattr(LOCAL, 'session'):
+        LOCAL.session = requests.Session()
+        LOCAL.session.headers.update(UA)
+    return LOCAL.session
 
 
 def get(url, path=None, tries=4):
@@ -27,7 +37,9 @@ def get(url, path=None, tries=4):
         return 0
     for i in range(tries):
         try:
-            b = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60).read()
+            response = session().get(url, timeout=(15, 60))
+            response.raise_for_status()
+            b = response.content
             if path is None:
                 return b
             os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -38,7 +50,7 @@ def get(url, path=None, tries=4):
             err = e
             time.sleep(2 + i * 3)
     print('失败', url, err, flush=True)
-    return None if path is None else 0
+    return None
 
 
 def inline_data(html):
@@ -71,12 +83,14 @@ def meta(lib):
         open(os.path.join(d, f), 'wb').write(get(base + 'data/' + f))
     t = open(os.path.join(d, 'images.js')).read()
     items = json.loads(t[t.index('['):t.rindex(']') + 1])
+    json.dump(items, open(os.path.join(d, 'data.json'), 'w'), ensure_ascii=False)
     return [x[k] for x in items for k in ('thumb', 'full') if x.get(k)]
 
 
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith('-')] or list(SRC)
     only_meta = '--meta-only' in sys.argv
+    failed = []
     for lib in args:
         files = meta(lib)
         print(f'{lib}: {len(files)} 个文件', flush=True)
@@ -86,9 +100,13 @@ def main():
         n = 0
         with cf.ThreadPoolExecutor(WORKERS) as ex:
             for i, s in enumerate(ex.map(lambda j: get(*j), jobs)):
+                if s is None:
+                    failed.append(jobs[i][0])
                 n += s or 0
                 if i % 200 == 0:
                     print(f'  {i}/{len(jobs)}  {n / 1e6:.0f} MB', flush=True)
+    if failed:
+        sys.exit(f'{len(failed)} 个文件下载失败，请重跑本命令；已下载文件会自动跳过。')
     print('完成。接下来运行：python3 build.py')
 
 
