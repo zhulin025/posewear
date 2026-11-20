@@ -3,8 +3,18 @@
 源码仓库：<https://github.com/zhulin025/posewear>。`origin` 指向本 fork，
 `upstream` 保留原作者仓库。
 
-主站：<https://posewear.halili.win>（Pages 项目 `posewear-zhulin025`）。
-大图和原图：Pages 项目 `posewear-originals-zhulin025`。
+主站：<https://posewear.halili.win>（Pages 项目 `posewear-cloudbuild`）。
+大图和原图：Pages 项目 `posewear-assets-cloudbuild`。
+
+## 在 Cloudflare 云端更新
+
+两个 Pages 项目都已连接本 fork 的 `main` 分支，可以直接在 Cloudflare 上
+下载素材、构建和发布，无需从本机上传数 GB 图片，也不需要 GitHub Actions Secret。
+Python 3.12、Node.js 24、站点域名和构建命令已配置在项目设置里。
+
+为确保先更新素材，当前暂停了推送后的自动部署。更新代码后，在 Cloudflare
+控制台先部署素材项目，成功后再部署主站项目。两个站点都使用免费套餐。
+也可以按下面的步骤本地构建和手动上传。
 
 ## 为什么拆成两个项目
 
@@ -45,14 +55,14 @@ npm run deploy:originals
 npm run deploy
 ```
 
-此项目使用本地构建和 Direct Upload；仅向 GitHub 推送代码不会自动更新站点。
+本地上传命令与云端构建都可用；仅向 GitHub 推送代码不会自动更新站点。
 `functions/api/proxy.js` 会随主站一起部署，素材站不包含 Functions。
 AI 图片生成仍使用访问者自己填写的 API Key，模型调用费用由对应服务商收取。
 
 ## 域名与现有服务
 
 本项目只新增 `posewear.halili.win` 的 CNAME，指向
-`posewear-zhulin025.pages.dev`。不改变 `halili.win` 的 nameservers、
+`posewear-cloudbuild.pages.dev`。不改变 `halili.win` 的 nameservers、
 根域名、`web3`、`ai`、`tts`、`guta` 记录或现有 Worker 路由。
 Cloudflare 管理 DNS，与阿里云 VPS 托管项目可以并存；每个主机名按自己的
 DNS 记录和 Worker 绑定分别路由。

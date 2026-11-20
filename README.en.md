@@ -12,10 +12,10 @@ Pose, outfit and portrait reference galleries with bilingual prompts, plus a bri
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-black)](LICENSE)
 [![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-f38020?logo=cloudflare&logoColor=white)](https://pages.cloudflare.com/)
-[![Live demo](https://img.shields.io/badge/demo-posewear.pages.dev-ff2442)](https://posewear.pages.dev)
+[![Live demo](https://img.shields.io/badge/demo-posewear.halili.win-ff2442)](https://posewear.halili.win)
 [![GitHub stars](https://img.shields.io/github/stars/atuizz/posewear?style=flat&color=black)](https://github.com/atuizz/posewear/stargazers)
 
-[Live demo](https://posewear.pages.dev) · [Features](#features) · [Quick start](#quick-start) · [Deploy](#deploy) · [FAQ](#faq) · [中文](README.md)
+[Live demo](https://posewear.halili.win) · [Features](#features) · [Quick start](#quick-start) · [Deploy](#deploy) · [FAQ](#faq) · [中文](README.md)
 
 <img src="docs/home.jpg" alt="Home" width="900">
 
@@ -65,7 +65,7 @@ You need Python 3.12+ for the SEO templates. Tests and deploys also need Node.js
 See [DEPLOYMENT.md](DEPLOYMENT.md) for this fork's two-project Pages deployment.
 
 ```bash
-git clone https://github.com/atuizz/posewear.git && cd posewear
+git clone https://github.com/zhulin025/posewear.git && cd posewear
 pip install -r requirements.txt
 python3 scripts/fetch-assets.py   # downloads data and images from the original galleries (several GB)
 python3 build.py                  # outputs dist/

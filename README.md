@@ -12,10 +12,10 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-black)](LICENSE)
 [![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-f38020?logo=cloudflare&logoColor=white)](https://pages.cloudflare.com/)
-[![在线体验](https://img.shields.io/badge/demo-posewear.pages.dev-ff2442)](https://posewear.pages.dev)
+[![在线体验](https://img.shields.io/badge/demo-posewear.halili.win-ff2442)](https://posewear.halili.win)
 [![GitHub stars](https://img.shields.io/github/stars/atuizz/posewear?style=flat&color=black)](https://github.com/atuizz/posewear/stargazers)
 
-[在线体验](https://posewear.pages.dev) · [功能](#功能) · [快速开始](#快速开始) · [部署](#部署) · [常见问题](#常见问题) · [English](README.en.md)
+[在线体验](https://posewear.halili.win) · [功能](#功能) · [快速开始](#快速开始) · [部署](#部署) · [常见问题](#常见问题) · [English](README.en.md)
 
 <img src="docs/home.jpg" alt="首页截图" width="900">
 
@@ -77,7 +77,7 @@
 本 fork 的域名、双项目免费部署与更新命令见 [DEPLOYMENT.md](DEPLOYMENT.md)。
 
 ```bash
-git clone https://github.com/atuizz/posewear.git && cd posewear
+git clone https://github.com/zhulin025/posewear.git && cd posewear
 pip install -r requirements.txt
 
 # 1. 从原作者的图库下载数据和图片到 ./assets-raw（数 GB，耗时较长）
@@ -119,7 +119,7 @@ npm install && npx playwright install chromium
 python3 -m http.server 8787 -d dist &
 node tests/v12.js      # 图库、收藏、灯箱、路由、移动端
 node tests/v13.js      # 试穿工作台全流程、深色模式、长文本
-U=https://posewear.pages.dev node tests/v12.js   # 直接测线上
+U=https://posewear.halili.win node tests/v12.js   # 直接测线上
 ```
 
 ## 目录结构

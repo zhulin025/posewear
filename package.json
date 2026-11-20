@@ -7,9 +7,9 @@
     "build": "python3 build.py",
     "serve": "python3 -m http.server 8787 -d dist",
     "test": "node tests/v12.js && node tests/v13.js",
-    "prepare:pages": "python3 scripts/prepare-pages.py --assets-origin https://posewear-originals-zhulin025.pages.dev",
-    "deploy": "wrangler pages deploy dist-pages --project-name posewear-zhulin025",
-    "deploy:originals": "wrangler --cwd dist-originals pages deploy . --project-name posewear-originals-zhulin025"
+    "prepare:pages": "python3 scripts/prepare-pages.py --assets-origin https://posewear-assets-cloudbuild.pages.dev",
+    "deploy": "wrangler pages deploy dist-pages --project-name posewear-cloudbuild",
+    "deploy:originals": "wrangler --cwd dist-originals pages deploy . --project-name posewear-assets-cloudbuild"
   },
   "devDependencies": {
     "playwright": "^1.48.0",
